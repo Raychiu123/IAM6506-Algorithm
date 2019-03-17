@@ -16,4 +16,7 @@ int main(){
 	//ARRAY1.insertion_sort();
 	ARRAY1.merge_sort_recursive(0,number-1);
 	ARRAY1.~Array();
+	
+	system("pause");
+	return 0;
 }
