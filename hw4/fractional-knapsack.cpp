@@ -7,8 +7,8 @@ class Item{
 	friend class F_Knapsack_Select;
 	public:
 		int index;
-		int value;
-		int weight;
+		float value;
+		float weight;
 		float crc;
 		float cp;
 };
@@ -20,12 +20,15 @@ class F_Knapsack_Select{
 		Item* sort_a;
 		
 		void return_select_item(){
+			int profit=0;
 			cout << "-------item seleced------" << endl;
 			for(int i=0; i<total; i++){
 				if(sort_a[i].crc > 0){
+					profit += (sort_a[i].crc * sort_a[i].value);
 					cout << "ITEM "<< sort_a[i].index << ":\t" << sort_a[i].crc << endl;
 				}
 			}
+			cout << endl << "Total Profit: " << profit;
 		}
 	public:
 		F_Knapsack_Select(int num){
@@ -57,26 +60,26 @@ class F_Knapsack_Select{
 			}
 		}
 		
-		void select_knapsack(int W){
-			int T = 0;
+		void select_knapsack(float W){
+			float T = 0;
 			for(int i=0; i<total; i++){
 				T+=sort_a[i].weight;
 				if(T<W){ 
 					sort_a[i].crc = 1;
 				}
 				else{
-					sort_a[i].crc = (float(W-T)/float(sort_a[i].weight));
-					cout << "sort_a.crc" << sort_a[i].crc << endl;
+					T-=sort_a[i].weight;
+					sort_a[i].crc = ((W-T)/(sort_a[i].weight));
 					break;
 				}
 			}
-			
 			return_select_item();
 		}
 };
 
 int main(){
-	int total, bound;
+	int total; 
+	float bound;
 	cout << "total: "; cin >> total;
 	cout << "capacity: "; cin >> bound;
 	
