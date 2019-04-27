@@ -58,6 +58,7 @@ class F_Knapsack_Select{
 					}					
 				}
 			}
+			delete[] cp_tmp;
 		}
 		
 		void select_knapsack(float W){
@@ -78,13 +79,16 @@ class F_Knapsack_Select{
 };
 
 int main(){
-	int total; 
-	float bound;
-	cout << "total: "; cin >> total;
-	cout << "capacity: "; cin >> bound;
+	char check='y';
+	while(check=='y' || check=='Y'){
+		int total; 
+		float bound;
+		cout << "total: "; cin >> total;
+		cout << "capacity: "; cin >> bound;
 	
-	F_Knapsack_Select FKS(total);
-	FKS.select_knapsack(bound);
-	
+		F_Knapsack_Select FKS(total);
+		FKS.select_knapsack(bound);
+		cout << "\nAGAIN?(y/n)"; cin >> check;
+	} 
 	return 0;
 }

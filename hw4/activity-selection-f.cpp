@@ -1,3 +1,4 @@
+// select min finish time //
 #include "iostream"
 #include "algorithm"
 
@@ -17,6 +18,16 @@ class Activity_Select{
 		int total;
 		Activity* a;
 		Activity* sort_a;
+		
+		void return_select_act(){
+			cout << "-------actitbity seleced------" << endl;
+			for(int i=0; i<total; i++){
+				if(sort_a[i].crc == 2){
+					cout << "ACTIVITY "<< sort_a[i].index << endl;
+				}
+
+			}
+		}
 	public:
 		Activity_Select(int num){
 			total = num;
@@ -29,7 +40,7 @@ class Activity_Select{
 				cout << "s"<< i+1 << ":\t"; cin >> a[i].s;
 				cout << "f"<< i+1 << ":\t"; cin >> a[i].f;
 				while(a[i].f < a[i].s){
-					cout << "WARNING: finish time is earlier than begin time" << endl;
+					cout << "WARNING: finish time is earlier than or same as begin time" << endl;
 					cout << "f"<< i+1 << ":\t"; cin >> a[i].f;
 				}
 				a[i].index = i+1;
@@ -48,16 +59,7 @@ class Activity_Select{
 					}					
 				}
 			}
-		}
-		
-		void return_select_act(){
-			cout << "-------actitbity seleced------" << endl;
-			for(int i=0; i<total; i++){
-				if(sort_a[i].crc == 2){
-					cout << "ACTIVITY "<< sort_a[i].index << endl;
-				}
-
-			}
+			delete[] finish;
 		}
 		
 		void select_act(){
@@ -75,10 +77,15 @@ class Activity_Select{
 };
 
 int main(){
-	int total;
-	cout << "number of activities: "; cin >> total;
+	char check='y';
+	while(check=='y' || check=='Y'){
+		int total;
+		cout << "number of activities: "; cin >> total;
 	
-	Activity_Select AS(total);
-	AS.select_act();
+		Activity_Select AS(total);
+		AS.select_act();
+		cout << "\nAGAIN?(y/n)"; cin >> check;
+	}
+	
 	return 0;
 } 

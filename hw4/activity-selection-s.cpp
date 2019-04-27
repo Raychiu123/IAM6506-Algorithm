@@ -1,3 +1,4 @@
+// select max start time //
 #include "iostream"
 #include "algorithm"
 
@@ -39,7 +40,7 @@ class Activity_Select{
 				cout << "s"<< i+1 << ":\t"; cin >> a[i].s;
 				cout << "f"<< i+1 << ":\t"; cin >> a[i].f;
 				while(a[i].f < a[i].s){
-					cout << "WARNING: finish time is earlier than begin time" << endl;
+					cout << "WARNING: finish time is earlier than or same as begin time" << endl;
 					cout << "f"<< i+1 << ":\t"; cin >> a[i].f;
 				}
 				a[i].index = i+1;
@@ -60,6 +61,7 @@ class Activity_Select{
 					}					
 				}
 			}
+			delete[] start;
 		}
 		
 		void select_act(){
@@ -77,10 +79,15 @@ class Activity_Select{
 };
 
 int main(){
-	int total;
-	cout << "number of activities: "; cin >> total;
+	char check='y';
+	while(check=='y' || check=='Y'){
+		int total;
+		cout << "number of activities: "; cin >> total;
 	
-	Activity_Select AS(total);
-	AS.select_act();
+		Activity_Select AS(total);
+		AS.select_act();
+		cout << "\nAGAIN?(y/n)"; cin >> check;
+	}
+	
 	return 0;
 } 
