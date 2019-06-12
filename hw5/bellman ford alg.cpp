@@ -37,10 +37,10 @@ bool bellman_ford(int** w, int source, int V)
 	
     for (int i=0; i<V; i++) d[i] = 1e9;
  	
-    d[source] = 0;				// 設定起點的最短路徑長度
-    parent[source] = source;    // 設定起點是樹根（父親為自己）
-    for (int i=0; i<V-1; i++){   // 重覆步驟V-1次
-        for (int a=0; a<V; ++a){ // 全部的邊都當作捷徑
+    d[source] = 0;				
+    parent[source] = source;    
+    for (int i=0; i<V-1; i++){   
+        for (int a=0; a<V; ++a){ 
             for (int b=0; b<V; ++b){
                 if (d[a] != 1e9 && w[a][b] != 1e9){
                     if (d[a] + w[a][b] < d[b])
